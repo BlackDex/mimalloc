@@ -769,15 +769,18 @@ static inline void mi_tls_slot_set(size_t slot, void* value) mi_attr_noexcept {
 static inline mi_threadid_t _mi_thread_id(void) mi_attr_noexcept {
 #if defined(__ANDROID__) && (defined(__arm__) || defined(__aarch64__))
   // issue #384, #495: on arm Android, slot 1 is the thread ID (pointer to pthread internal struct) 
+  #warning DEBUG_2 Use slot(1) arm32 or arm64+android
   return (uintptr_t)mi_tls_slot(1);
 #else
   // in all our other targets, slot 0 is the pointer to the thread control block
+  #warning DEBUG_2 Use slot(0) All other targets
   return (uintptr_t)mi_tls_slot(0);
 #endif
 }
 #else
 // otherwise use portable C
 static inline mi_threadid_t _mi_thread_id(void) mi_attr_noexcept {
+  #warning DEBUG_2 Use standard C threadid
   return (uintptr_t)&_mi_heap_default;
 }
 #endif

@@ -796,7 +796,7 @@ static inline mi_threadid_t _mi_thread_id(void) mi_attr_noexcept {
 }
 
 #elif defined(__GNUC__) && \
-      (defined(__x86_64__) || defined(__i386__) || defined(__aarch64__))
+      (defined(__x86_64__) || defined(__i386__) || defined(__Xaarch64__))
 
 // see also https://akkadia.org/drepper/tls.pdf for more info on the TLS register.
 static inline void* mi_tls_slot(size_t slot) mi_attr_noexcept {
